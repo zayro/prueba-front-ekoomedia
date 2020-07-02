@@ -170,8 +170,11 @@ function App() {
 
                 <h1>
                     <p className="text-center"> Hola bienvenido sabemos que quieres viajar en un {title}{" "} </p>
-
                 </h1>
+
+                <h4>
+                    <p className="text-center">por favor diligencia el siguiente formulario:</p>
+                </h4>
 
                 <hr />
 
