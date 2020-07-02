@@ -1,4 +1,3 @@
-import { createStore } from 'redux';
 
 export const initialState = {
     menus: [

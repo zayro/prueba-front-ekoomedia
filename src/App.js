@@ -28,6 +28,15 @@ function App() {
     });
 
 
+
+    const url_sever_name = window.location.hostname;
+    let port = 8000;
+
+    if (process.env.NODE_ENV !== 'production') {
+         port = 80;
+      }
+
+
     const handleInputChange = (event) => {
         // console.log(event.target.name)
         // console.log(event.target.value)
@@ -37,18 +46,31 @@ function App() {
         })
     }
 
-    const fetchDataMenu = async () => {
-        const result = await axios(
-            `http://localhost:8000/ObtenerMenu`,
-        );
+    const fetchDataMenu = () => {
 
-        console.log('result', result.data.data);
-        console.log('result', result.data.status);
 
-        if (result.data.status) {
-            setMenu(result.data);
-            dispatch(add_menu(result.data.data));
-        }
+        axios.request({
+            method: 'get',
+            url: `http://localhost:8000/ObtenerMenu`,
+            data: datos,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(function (response) {
+                console.log(response);
+                console.log(response.message);
+                if (response.data.status) {
+                    setMenu(response.data);
+                    dispatch(add_menu(response.data.data));
+                }
+
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
 
     };
@@ -59,7 +81,7 @@ function App() {
 
         axios.request({
             method: 'post',
-            url: `http://localhost:8000/GuardaInformacion`,
+            url: `http://${url_sever_name}:${port}/GuardaInformacion`,
             data: datos,
             headers: {
                 'Accept': 'application/json',
@@ -95,8 +117,7 @@ function App() {
 
     useEffect(() => {
         fetchDataMenu();
-
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
@@ -117,6 +138,8 @@ function App() {
                     </ul>
                 </nav>
 
+                <hr/>
+
                 <h1>Hola bienvenido sabemos que quieres viajar en un {title}  </h1>
 
                 <hr />
@@ -124,10 +147,10 @@ function App() {
 
                 <form onSubmit={GuardarInformacion}>
 
-                    <input type="text" placeholder="nombre" onChange={handleInputChange} name="nombre" type="text" required />
-                    <input type="text" placeholder="email" onChange={handleInputChange} name="email" type="email" />
-                    <input type="text" placeholder="celular" onChange={handleInputChange} name="celular" type="text" />
-                    <input type="text" placeholder="number" onChange={handleInputChange} name="edad" type="number" />
+                    <input  placeholder="nombre" onChange={handleInputChange} name="nombre" id="nombre" type="text" required />
+                    <input  placeholder="email" onChange={handleInputChange} name="email" id="email" type="email" />
+                    <input  placeholder="celular" onChange={handleInputChange} name="celular" type="text" />
+                    <input  placeholder="number" onChange={handleInputChange} name="edad" type="number" />
 
                     <button type="submit" >Enviar </button>
                 </form>
