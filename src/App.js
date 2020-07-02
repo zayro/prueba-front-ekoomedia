@@ -30,14 +30,14 @@ function App() {
 
 
     const url_sever_name = window.location.hostname;
-    let url = `http://${url_sever_name}:8000`;
 
+    let url = `http://${url_sever_name}`;
 
+    if( url_sever_name === 'localhost'){
+         url = `http://${url_sever_name}:8000`;
+    }
 
-    if (process.env.NODE_ENV !== 'production') {
-         url = `https://api-ekoomedia.herokuapp.com`;
-      }
-
+    console.log(process.env.NODE_ENV);
 
     const handleInputChange = (event) => {
         // console.log(event.target.name)
