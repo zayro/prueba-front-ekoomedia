@@ -1,3 +1,9 @@
+$color-primary: #4CAF50;
+$color-secundary: #555;
+$color-menu: #1D96CB;
+
+$color-error: #CB3C1D;
+
 ul.sidenav {
     list-style-type: none;
     margin: 0;
@@ -20,12 +26,12 @@ ul.sidenav {
   }
 
   ul.sidenav li a.active {
-    background-color: #4CAF50;
+    background-color: $color-menu;
     color: white;
   }
 
   ul.sidenav li a:hover:not(.active) {
-    background-color: #555;
+    background-color: $color-secundary;
     color: white;
   }
 
@@ -46,4 +52,36 @@ ul.sidenav {
       text-align: center;
       float: none;
     }
+  }
+
+  .text-center {
+    text-align: center;
+    margin: 0 auto;
+
+  }
+
+
+    /**
+    * FORM
+    */
+
+
+
+  input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+
+  .error{
+    color: $color-error;
+
   }
