@@ -87,8 +87,12 @@ function App() {
             return false;
         }
 
-        console.log(datos.edad);
-        if (datos.edad < 18 || datos.edad > 100 || typeof datos.edad !== 'number') {
+
+        const edad = parseInt(datos.edad);
+        console.log(edad);
+
+
+        if ( (edad < 18 || edad > 100) || isNaN(edad) ) {
             setValidacion("no cumple el rango de EDAD");
 
             return false;
@@ -105,6 +109,14 @@ function App() {
 
             return false;
         }
+
+        swal({
+            title: "Enviando ",
+            text: `espere un momento.`,
+            icon: "success",
+            button: "cerrar",
+            timer: 1500,
+        });
 
 
         axios
@@ -127,6 +139,9 @@ function App() {
                     button: "cerrar",
                     timer: 3000,
                 });
+
+                document.getElementById("envio").reset();
+                setValidacion('');
             })
             .catch(function (error) {
                 console.log(error);
@@ -178,7 +193,7 @@ function App() {
 
                 <hr />
 
-                <form onSubmit={GuardarInformacion}>
+                <form name="envio" id="envio" onSubmit={GuardarInformacion}>
                     {/*                     <input  placeholder="nombre" onChange={handleInputChange} name="nombre" id="nombre" type="text" required />
                     <input  placeholder="email" onChange={handleInputChange} name="email" id="email" type="email" required />
                     <input  placeholder="celular" onChange={handleInputChange} name="celular" type="text" required />
