@@ -1,1 +1,1 @@
-web: npx serve -s build -l 80
+web: npx serve -s build
