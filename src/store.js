@@ -1,18 +1,12 @@
-import { createStore } from "redux";
+import { createStore } from 'redux';
+import  { reducer, initialState } from './redux';
 
-// import the root reducer
-import rootReducer from './reducers';
-
-// import default data
-import dataUser from './config/users';
-
-export const defaultState = {
-    "dataUser": dataUser
-};
-
-
-const store = createStore(
-    rootReducer);
+export const store = createStore(
+    reducer,
+    initialState,
+    window.devToolsExtension && window.devToolsExtension()
+  );
 
 
 export default store;
+

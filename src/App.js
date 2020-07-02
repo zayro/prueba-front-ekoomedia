@@ -1,21 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
+import { connect, useSelector, useDispatch  } from "react-redux";
+import {add_menu} from './redux';
 import './style/menu.scss';
 
 function App() {
 
+    //Redux
+    const menu$ = useSelector(state => state.menus);
+    console.log('Load Menu',menu$);
+
+    //const add_menu = useActions((data) => add_menu(data));
+    const dispatch = useDispatch();
+
+
     // Declara title del texto
     const [title, setTitle] = useState('X');
 
-    const [menu, setMenu] = useState({ data: [] });
+    const [menu, setMenu] = useState({ data: menu$ });
 
     const [datos, setDatos] = useState({
         nombre: '',
         email: '',
         celular: '',
         edad: ''
-    })
+    });
+
 
     const handleInputChange = (event) => {
         // console.log(event.target.name)
@@ -36,6 +47,7 @@ function App() {
 
         if (result.data.status) {
             setMenu(result.data);
+            dispatch(add_menu(result.data.data));
         }
 
 
@@ -94,8 +106,6 @@ function App() {
 
             <header>
 
-
-
                 <nav>
                     <ul className="sidenav">
                         {menu.data.map(item => (
@@ -119,7 +129,7 @@ function App() {
                     <input type="text" placeholder="celular" onChange={handleInputChange} name="celular" type="text" />
                     <input type="text" placeholder="number" onChange={handleInputChange} name="edad" type="number" />
 
-                    <input type="submit" value="Submit" />
+                    <button type="submit" >Enviar </button>
                 </form>
 
 
@@ -130,4 +140,7 @@ function App() {
     );
 }
 
-export default App;
+
+
+
+export default connect() (App);
