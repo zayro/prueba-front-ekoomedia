@@ -31,7 +31,7 @@ function App() {
 
     const url_sever_name = window.location.hostname;
 
-    let url = `http://${url_sever_name}`;
+    let url = `https://${url_sever_name}`;
 
     if( url_sever_name === 'localhost'){
          url = `http://${url_sever_name}:8000`;
