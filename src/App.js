@@ -30,10 +30,12 @@ function App() {
 
 
     const url_sever_name = window.location.hostname;
-    let port = 8000;
+    let url = `http://${url_sever_name}:8000`;
+
+
 
     if (process.env.NODE_ENV !== 'production') {
-         port = 80;
+         url = `https://api-ekoomedia.herokuapp.com`;
       }
 
 
@@ -51,7 +53,7 @@ function App() {
 
         axios.request({
             method: 'get',
-            url: `http://localhost:8000/ObtenerMenu`,
+            url: `${url}/ObtenerMenu`,
             data: datos,
             headers: {
                 'Accept': 'application/json',
@@ -81,7 +83,7 @@ function App() {
 
         axios.request({
             method: 'post',
-            url: `http://${url_sever_name}:${port}/GuardaInformacion`,
+            url: `${url}/GuardaInformacion`,
             data: datos,
             headers: {
                 'Accept': 'application/json',
