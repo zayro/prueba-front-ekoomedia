@@ -31,10 +31,12 @@ function App() {
 
     const url_sever_name = window.location.hostname;
 
-    let url = `https://${url_sever_name}`;
+    let url = ``;
 
     if( url_sever_name === 'localhost'){
          url = `http://${url_sever_name}:8000`;
+    } else {
+        url = `https://api-ekoomedia.herokuapp.com`;
     }
 
     console.log(process.env.NODE_ENV);
